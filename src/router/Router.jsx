@@ -23,7 +23,7 @@ import BeAMember from "../pages/Dashbord/BeAUser/BeAMember";
 import PendingMembers from "../pages/Dashbord/PendingMembers/PendingMembers";
 import ActiveMembers from "../pages/Dashbord/ActiveMembers/ActiveMembers";
 import MakeAdmin from "../pages/Dashbord/MakeAdmin/MakeAdmin";
-
+import MyProfile from "../pages/Dashbord/Be-A-User/MyProfile";
 
 export const router = createBrowserRouter([
   {
@@ -57,7 +57,11 @@ export const router = createBrowserRouter([
       // },
       {
         path: "BeAMember",
-        element: <PrivateRoutes><BeAMember></BeAMember></PrivateRoutes>
+        element: (
+          <PrivateRoutes>
+            <BeAMember></BeAMember>
+          </PrivateRoutes>
+        ),
       },
     ],
   },
@@ -85,7 +89,7 @@ export const router = createBrowserRouter([
       </PrivateRoutes>
     ),
     children: [
-      //member's part
+      //member's part start 
       {
         path: "membersProfile",
         Component: MembersProfile,
@@ -110,18 +114,27 @@ export const router = createBrowserRouter([
       //   path: "beAUser",
       //   Component: BeAUser,
       // },
-      //members link 
+      //members link
       {
-        path:'PendingMembers',
-        Component:PendingMembers
+        path: "PendingMembers",
+        Component: PendingMembers,
       },
       {
-        path:'ActiveMembers',
-        Component:ActiveMembers
-      },{
-        path:'MakeAdmin',
-        Component:MakeAdmin
-      }
+        path: "ActiveMembers",
+        Component: ActiveMembers,
+      },
+        
+       //user part start 
+      {
+          path:'MyProfile',
+          Component: MyProfile
+      },
+
+      //admin part
+      {
+        path: "MakeAdmin",
+        Component: MakeAdmin,
+      },
     ],
   },
 ]);

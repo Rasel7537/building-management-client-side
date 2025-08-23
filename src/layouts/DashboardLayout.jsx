@@ -58,14 +58,19 @@ const DashboardLayout = () => {
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
           {/* Sidebar content here */}
           <Buildinglogo></Buildinglogo>
-          <li>
-            <NavLink
-              to="/"
-              className={({ isActive }) => (isActive ? activeClass : linkClass)}
-            >
-              <FaHome className="text-lg" /> Home
-            </NavLink>
-            {/* <li>
+
+          {!roleLoading && role === "member" && (
+            <>
+              <li>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive ? activeClass : linkClass
+                  }
+                >
+                  <FaHome className="text-lg" /> Home
+                </NavLink>
+                {/* <li>
               <NavLink
               to="beAUser"
               className={({ isActive }) => (isActive ? activeClass : linkClass)}
@@ -73,37 +78,48 @@ const DashboardLayout = () => {
               <FaHome className="text-lg" /> User 
             </NavLink>
             </li> */}
-          </li>
-          <li>
-            <NavLink
-              to="membersProfile"
-              className={({ isActive }) => (isActive ? activeClass : linkClass)}
-            >
-              <FaUser className="text-lg" /> My Profile
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="myApartment"
-              className={({ isActive }) => (isActive ? activeClass : linkClass)}
-            >
-              <FaBuilding className="text-lg" /> My Apartment
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="payment-history"
-              className={({ isActive }) => (isActive ? activeClass : linkClass)}
-            >
-              <FaMoneyBillWave className="text-lg" /> Payment History
-            </NavLink>
-            <NavLink
-              to="Announcements"
-              className={({ isActive }) => (isActive ? activeClass : linkClass)}
-            >
-              <FaBullhorn className="text-lg" /> Announcements
-            </NavLink>
-          </li>
+              </li>
+              <li>
+                <NavLink
+                  to="membersProfile"
+                  className={({ isActive }) =>
+                    isActive ? activeClass : linkClass
+                  }
+                >
+                  <FaUser className="text-lg" /> My Profile
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="myApartment"
+                  className={({ isActive }) =>
+                    isActive ? activeClass : linkClass
+                  }
+                >
+                  <FaBuilding className="text-lg" /> My Apartment
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="payment-history"
+                  className={({ isActive }) =>
+                    isActive ? activeClass : linkClass
+                  }
+                >
+                  <FaMoneyBillWave className="text-lg" /> Payment History
+                </NavLink>
+                <NavLink
+                  to="Announcements"
+                  className={({ isActive }) =>
+                    isActive ? activeClass : linkClass
+                  }
+                >
+                  <FaBullhorn className="text-lg" /> Announcements
+                </NavLink>
+              </li>
+            </>
+          )}
+
           {!roleLoading && role === "admin" && (
             <>
               <li>
@@ -114,6 +130,14 @@ const DashboardLayout = () => {
               </li>
               <li>
                 <NavLink to={"MakeAdmin"}>Make Admin</NavLink>
+              </li>
+            </>
+          )}
+
+          {!roleLoading && role === "user" && (
+            <>
+              <li>
+                <NavLink to={"MyProfile"}> My User profile</NavLink>
               </li>
             </>
           )}
