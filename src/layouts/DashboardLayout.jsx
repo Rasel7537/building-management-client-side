@@ -100,6 +100,12 @@ const DashboardLayout = () => {
               <FaBullhorn className="text-lg" /> Announcements
             </NavLink>
           </li>
+          <li>
+            <NavLink to={'PendingMembers'}>Pending Members</NavLink>
+          </li>
+          <li>
+            <NavLink to={'ActiveMembers'}>active Members</NavLink>
+          </li>
         </ul>
       </div>
     </div>

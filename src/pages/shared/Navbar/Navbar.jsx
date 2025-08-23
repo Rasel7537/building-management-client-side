@@ -232,7 +232,7 @@ const Navbar = () => {
         <NavLink to={"/about"}>About Us</NavLink>
       </li>
       <li className="text-black">
-        <NavLink to={"/beAUser"}> User </NavLink>
+        <NavLink to={"/BeAMember"}> Member</NavLink>
       </li>
     </>
   );
