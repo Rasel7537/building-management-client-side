@@ -8,15 +8,19 @@ import {
   FaMoneyBillWave,
   FaBullhorn,
 } from "react-icons/fa";
+import useUserRole from "../hooks/useUserRole";
 
 const DashboardLayout = () => {
+  const { role, roleLoading } = useUserRole();
+  console.log(role);
+
   const linkClass =
     "flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 hover:bg-indigo-100 hover:text-indigo-600 transition-all duration-200";
   const activeClass =
     "flex items-center gap-3 px-4 py-2 rounded-lg bg-indigo-500 text-white shadow-md";
   return (
     <div className="drawer lg:drawer-open">
-      <input id="my-drawer-2" type="checkbox" className="drawer-toggle"/>
+      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col ">
         <div className="navbar bg-base-300 w-full lg:hidden">
           <div className="flex-none lg:hidden">
@@ -100,12 +104,19 @@ const DashboardLayout = () => {
               <FaBullhorn className="text-lg" /> Announcements
             </NavLink>
           </li>
-          <li>
-            <NavLink to={'PendingMembers'}>Pending Members</NavLink>
-          </li>
-          <li>
-            <NavLink to={'ActiveMembers'}>active Members</NavLink>
-          </li>
+          {!roleLoading && role === "admin" && (
+            <>
+              <li>
+                <NavLink to={"PendingMembers"}>Pending Members</NavLink>
+              </li>
+              <li>
+                <NavLink to={"ActiveMembers"}>active Members</NavLink>
+              </li>
+              <li>
+                <NavLink to={"MakeAdmin"}>Make Admin</NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </div>

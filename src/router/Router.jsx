@@ -22,6 +22,7 @@ import ManageMembers from "../pages/Dashbord/PendingMembers/PendingMembers";
 import BeAMember from "../pages/Dashbord/BeAUser/BeAMember";
 import PendingMembers from "../pages/Dashbord/PendingMembers/PendingMembers";
 import ActiveMembers from "../pages/Dashbord/ActiveMembers/ActiveMembers";
+import MakeAdmin from "../pages/Dashbord/MakeAdmin/MakeAdmin";
 
 
 export const router = createBrowserRouter([
@@ -117,6 +118,9 @@ export const router = createBrowserRouter([
       {
         path:'ActiveMembers',
         Component:ActiveMembers
+      },{
+        path:'MakeAdmin',
+        Component:MakeAdmin
       }
     ],
   },
