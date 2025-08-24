@@ -119,10 +119,10 @@ const DashboardLayout = () => {
               </li>
             </>
           )}
-
+          {/* admin role */}
           {!roleLoading && role === "admin" && (
             <>
-              <li>
+              {/* <li>
                 <NavLink to={"PendingMembers"}>Pending Members</NavLink>
               </li>
               <li>
@@ -130,14 +130,27 @@ const DashboardLayout = () => {
               </li>
               <li>
                 <NavLink to={"MakeAdmin"}>Make Admin</NavLink>
+              </li> */}
+              <li>
+                <NavLink to={"manageMembers"}>Manage Members</NavLink>
+              </li>
+              <li>
+                <NavLink to={"MakeAnnouncement"}>Make Announcement </NavLink>
+              </li>
+              <li>
+                <NavLink to={"AgreementRequests"}> Agreement Requests</NavLink>
               </li>
             </>
           )}
 
+          {/* user role */}
           {!roleLoading && role === "user" && (
             <>
               <li>
                 <NavLink to={"MyProfile"}> My User profile</NavLink>
+              </li>
+              <li>
+                <NavLink to={"announcement"}>Announcement</NavLink>
               </li>
             </>
           )}

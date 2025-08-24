@@ -18,12 +18,16 @@ import MembersProfile from "../pages/Dashbord/MembersProfile/MembersProfile";
 import AnnouncementsToAll from "../pages/Dashbord/AnnouncementsToAll/AnnouncementsToAll";
 import BeAUser from "../pages/Dashbord/BeAUser/BeAMember";
 import PendingUser from "../pages/Dashbord/PendingMembers/PendingMembers";
-import ManageMembers from "../pages/Dashbord/PendingMembers/PendingMembers";
+// import ManageMembers from "../pages/Dashbord/PendingMembers/PendingMembers";
 import BeAMember from "../pages/Dashbord/BeAUser/BeAMember";
 import PendingMembers from "../pages/Dashbord/PendingMembers/PendingMembers";
 import ActiveMembers from "../pages/Dashbord/ActiveMembers/ActiveMembers";
 import MakeAdmin from "../pages/Dashbord/MakeAdmin/MakeAdmin";
 import MyProfile from "../pages/Dashbord/Be-A-User/MyProfile";
+import ManageMembers from "../pages/Dashbord/ManageMembers/ManageMembers";
+import MakeAnnouncement from "../pages/Dashbord/MakeAnnouncement/MakeAnnouncement";
+import Announcement from "../pages/Dashbord/Be-A-User/Announcement";
+import AgreementRequests from "../pages/Dashbord/AgreementRequests/AgreementRequests";
 
 export const router = createBrowserRouter([
   {
@@ -89,7 +93,7 @@ export const router = createBrowserRouter([
       </PrivateRoutes>
     ),
     children: [
-      //member's part start 
+      //member's part start
       {
         path: "membersProfile",
         Component: MembersProfile,
@@ -123,17 +127,33 @@ export const router = createBrowserRouter([
         path: "ActiveMembers",
         Component: ActiveMembers,
       },
-        
-       //user part start 
+
+      //user part start
       {
-          path:'MyProfile',
-          Component: MyProfile
+        path: "MyProfile",
+        Component: MyProfile,
+      },
+      {
+        path:"announcement",
+        Component:Announcement,
       },
 
       //admin part
       {
         path: "MakeAdmin",
         Component: MakeAdmin,
+      },
+      {
+        path: "manageMembers",
+        Component: ManageMembers,
+      },
+      {
+        path: "MakeAnnouncement",
+        Component: MakeAnnouncement,
+      },
+      {
+        path:"AgreementRequests",
+        Component: AgreementRequests
       },
     ],
   },
