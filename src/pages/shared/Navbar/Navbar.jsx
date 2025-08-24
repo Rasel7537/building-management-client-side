@@ -7,8 +7,10 @@
 
 // const Navbar = () => {
 //   const { user, logOut } = useContext(AuthContext);
-//   const [setLoading] = useState(true);
-//   const [setRole] = useState("");
+
+//   // ✅ Correct useState usage
+//   const [loading, setLoading] = useState(true);
+//   const [role, setRole] = useState("");
 
 //   useEffect(() => {
 //     if (user?.email) {
@@ -23,7 +25,7 @@
 //           setLoading(false);
 //         });
 //     } else {
-//       // setLoading(false);
+//       setLoading(false);
 //     }
 //   }, [user]);
 
@@ -58,21 +60,13 @@
 //       <li className="text-black">
 //         <NavLink to={"/apartments"}>Apartments</NavLink>
 //       </li>
-//       <li className="text-black">
-//         <NavLink to={"/AddApartment"}>Add Apartment</NavLink>
-//       </li>
-//       <li className="text-black">
-//         <NavLink to={"/addCoupon"}>Add Coupon</NavLink>
-//       </li>
+
 //       <li>
 //         <Link to="/dashboard">Dashboard</Link>
 //       </li>
-//       <li className="text-black">
+//       {/* <li className="text-black">
 //         <NavLink to={"/about"}>About Us</NavLink>
-//       </li>
-//       <li className="text-black">
-//         <NavLink to={"/beAUser"}> User </NavLink>
-//       </li>
+//       </li> */}
 //     </>
 //   );
 
@@ -154,9 +148,6 @@
 
 // export default Navbar;
 
-
-
-
 import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
@@ -171,6 +162,7 @@ const Navbar = () => {
   const [loading, setLoading] = useState(true);
   const [role, setRole] = useState("");
 
+  console.log(role, loading);
   useEffect(() => {
     if (user?.email) {
       fetch(`http://localhost:5000/users/${user.email}`)
@@ -219,21 +211,15 @@ const Navbar = () => {
       <li className="text-black">
         <NavLink to={"/apartments"}>Apartments</NavLink>
       </li>
-      <li className="text-black">
-        <NavLink to={"/AddApartment"}>Add Apartment</NavLink>
-      </li>
-      <li className="text-black">
-        <NavLink to={"/addCoupon"}>Add Coupon</NavLink>
-      </li>
+
       <li>
         <Link to="/dashboard">Dashboard</Link>
       </li>
-      <li className="text-black">
+
+
+      {/* <li className="text-black">
         <NavLink to={"/about"}>About Us</NavLink>
-      </li>
-      <li className="text-black">
-        <NavLink to={"/BeAMember"}> Member</NavLink>
-      </li>
+      </li> */}
     </>
   );
 
@@ -289,11 +275,21 @@ const Navbar = () => {
                 />
               </div>
             </div>
+
+            {/* ✅ Dropdown items */}
             <ul className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+              {/* User name only */}
               <li className="text-center font-semibold cursor-default">
                 {user.displayName || "Anonymous User"}
               </li>
+              <div className="divider my-1"></div>
 
+              {/* Dashboard link */}
+              <li>
+                <Link to="/dashboard">Dashboard</Link>
+              </li>
+
+              {/* Logout button */}
               <li>
                 <button onClick={handleLogout}>Logout</button>
               </li>

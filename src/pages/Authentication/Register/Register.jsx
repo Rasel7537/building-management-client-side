@@ -31,7 +31,8 @@
 //       await updateUserProfile(userProfile);
 //       console.log("Firebase profile updated ✅");
 
-//       // 3. Backend এ save user info
+//       // 3. Save user info in backend
+//       // 👉 Added extra default fields (agreementAcceptDate & rentedApartment)
 //       const newUser = {
 //         name: name,
 //         email: email,
@@ -39,6 +40,14 @@
 //         role: "user",
 //         createdAt: new Date().toISOString(),
 //         lastLogin: new Date().toISOString(),
+
+//         // ✅ Default values for normal user
+//         agreementAcceptDate: null, // user hasn’t accepted any agreement yet
+//         rentedApartment: {
+//           floor: null,
+//           block: null,
+//           roomNo: null,
+//         },
 //       };
 
 //       const userRes = await axiosInstance.post("/users", newUser);
@@ -123,6 +132,8 @@
 
 
 
+
+
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -132,7 +143,12 @@ import axios from "axios";
 import useAxios from "../../../hooks/useAxios";
 
 const Register = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const { createUser, updateUserProfile } = UseAuth();
   const navigate = useNavigate();
   const [profilePic, setProfilePic] = useState("");
@@ -156,7 +172,6 @@ const Register = () => {
       console.log("Firebase profile updated ✅");
 
       // 3. Save user info in backend
-      // 👉 Added extra default fields (agreementAcceptDate & rentedApartment)
       const newUser = {
         name: name,
         email: email,
@@ -164,9 +179,7 @@ const Register = () => {
         role: "user",
         createdAt: new Date().toISOString(),
         lastLogin: new Date().toISOString(),
-
-        // ✅ Default values for normal user
-        agreementAcceptDate: null, // user hasn’t accepted any agreement yet
+        agreementAcceptDate: null,
         rentedApartment: {
           floor: null,
           block: null,
@@ -213,34 +226,59 @@ const Register = () => {
           {/* Name */}
           <input
             type="text"
-            {...register("name", { required: true })}
+            {...register("name", { required: "Name is required" })}
             placeholder="Name"
             className="input input-bordered w-full"
           />
+          {errors.name && (
+            <p className="text-red-500 text-sm">{errors.name.message}</p>
+          )}
+
           {/* Email */}
           <input
             type="email"
-            {...register("email", { required: true })}
+            {...register("email", { required: "Email is required" })}
             placeholder="Email"
             className="input input-bordered w-full"
           />
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email.message}</p>
+          )}
+
           {/* Profile Picture */}
           <input
             type="file"
             onChange={handleImageUpload}
             className="file-input file-input-bordered w-full"
           />
+
           {/* Password */}
           <input
             type="password"
-            {...register("password", { required: true })}
+            {...register("password", {
+              required: "Password is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters",
+              },
+              pattern: {
+                value: /^(?=.*[a-z])(?=.*[A-Z]).+$/,
+                message:
+                  "Password must have at least one uppercase & one lowercase letter",
+              },
+            })}
             placeholder="Password"
             className="input input-bordered w-full"
           />
+          {errors.password && (
+            <p className="text-red-500 text-sm">{errors.password.message}</p>
+          )}
+
           <button type="submit" className="btn btn-primary w-full">
             Register
           </button>
         </form>
+
         <p className="text-center text-sm">
           Already have an account?{" "}
           <Link to="/login" className="text-blue-600 hover:underline">

@@ -16,8 +16,6 @@ import Payment from "../pages/Dashbord/Payment/Payment";
 import PaymentHistory from "../pages/Dashbord/PaymentHistory/PaymentHistory";
 import MembersProfile from "../pages/Dashbord/MembersProfile/MembersProfile";
 import AnnouncementsToAll from "../pages/Dashbord/AnnouncementsToAll/AnnouncementsToAll";
-import BeAUser from "../pages/Dashbord/BeAUser/BeAMember";
-import PendingUser from "../pages/Dashbord/PendingMembers/PendingMembers";
 // import ManageMembers from "../pages/Dashbord/PendingMembers/PendingMembers";
 import BeAMember from "../pages/Dashbord/BeAUser/BeAMember";
 import PendingMembers from "../pages/Dashbord/PendingMembers/PendingMembers";
@@ -28,6 +26,7 @@ import ManageMembers from "../pages/Dashbord/ManageMembers/ManageMembers";
 import MakeAnnouncement from "../pages/Dashbord/MakeAnnouncement/MakeAnnouncement";
 import Announcement from "../pages/Dashbord/Be-A-User/Announcement";
 import AgreementRequests from "../pages/Dashbord/AgreementRequests/AgreementRequests";
+import ManageCoupons from "../pages/Dashbord/ManageCoupons/ManageCoupons";
 
 export const router = createBrowserRouter([
   {
@@ -50,15 +49,7 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
       },
-      // // যদি AddCoupon.jsx থাকে তাহলে uncomment করুন
-      // {
-      //   path: "addCoupon",
-      //   element: (
-      //     <PrivateRoutes>
-      //       <AddCoupon />
-      //     </PrivateRoutes>
-      //   ),
-      // },
+      
       {
         path: "BeAMember",
         element: (
@@ -114,11 +105,7 @@ export const router = createBrowserRouter([
         path: "Announcements",
         Component: AnnouncementsToAll,
       },
-      // {
-      //   path: "beAUser",
-      //   Component: BeAUser,
-      // },
-      //members link
+
       {
         path: "PendingMembers",
         Component: PendingMembers,
@@ -155,6 +142,10 @@ export const router = createBrowserRouter([
         path:"AgreementRequests",
         Component: AgreementRequests
       },
+      {
+        path:"ManageCoupons",
+        Component: ManageCoupons
+      }
     ],
   },
 ]);

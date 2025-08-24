@@ -140,6 +140,10 @@ const DashboardLayout = () => {
               <li>
                 <NavLink to={"AgreementRequests"}> Agreement Requests</NavLink>
               </li>
+              <li>
+                <NavLink to={"ManageCoupons"}> Manage Coupons </NavLink>
+              </li>
+
             </>
           )}
 

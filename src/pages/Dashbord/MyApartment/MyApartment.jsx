@@ -1,7 +1,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import Swal from "sweetalert2"; // SweetAlert2 import
+import Swal from "sweetalert2";
 import UseAuth from "../../../hooks/UseAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router";
@@ -16,28 +16,26 @@ const MyApartment = () => {
     data: agreements = [],
     isLoading,
     isError,
-    refetch, // will be used after delete
+    refetch,
   } = useQuery({
     queryKey: ["my-apartment", user?.email],
     queryFn: async () => {
-      // ⚡ CHANGED: Get Firebase ID token instead of using user.accessToken directly
-      const token = await user.getIdToken(); // English comment: fetch Firebase JWT
+      const token = await user.getIdToken();
 
       const res = await axiosSecure.get(`/agreements?email=${user?.email}`, {
         headers: {
-          Authorization: `Bearer ${token}`, // English comment: attach Firebase token
+          Authorization: `Bearer ${token}`,
         },
       });
-      return res.data.data; // array
+
+      console.log("📌 API Response:", res.data);
+      return res.data || []; // ✅ backend থেকে সরাসরি array আসছে
     },
     enabled: !!user?.email,
   });
 
   // handle payment
   const handlePay = async (id) => {
-    console.log("proceed to payment for", id);
-
-    // 👉 Ask for month input before navigating
     const { value: month } = await Swal.fire({
       title: "Enter Rent Month",
       input: "text",
@@ -46,18 +44,16 @@ const MyApartment = () => {
       showCancelButton: true,
     });
 
-    if (!month) return; // if cancelled, stop
+    if (!month) return;
 
-    // 👉 Pass month info with navigate (via state)
     navigate(`/dashboard/payment/${id}`, { state: { month } });
   };
 
-  // handle delete with confirmation
+  // handle delete
   const handleDelete = async (id) => {
-    // 1) ask for confirmation
     const result = await Swal.fire({
       title: "Are you sure?",
-      text: "You won't be able to revert this action!",
+      text: "You won’t be able to revert this action!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Yes, delete it!",
@@ -68,17 +64,13 @@ const MyApartment = () => {
     if (!result.isConfirmed) return;
 
     try {
-      // 2) call delete API
       const res = await axiosSecure.delete(`/agreements/${id}`);
-
-      // BE might return {deletedCount: 1} or {success: true}, handle both
       const ok =
         res?.data?.deletedCount > 0 ||
         res?.data?.success === true ||
         res?.status === 200;
 
       if (ok) {
-        // 3) show success
         await Swal.fire({
           title: "Deleted!",
           text: "Agreement has been deleted successfully.",
@@ -86,14 +78,11 @@ const MyApartment = () => {
           timer: 1500,
           showConfirmButton: false,
         });
-
-        // 4) refresh table
         refetch();
       } else {
         throw new Error("Delete failed");
       }
     } catch (err) {
-      // show error
       Swal.fire({
         title: "Failed!",
         text:
@@ -104,15 +93,8 @@ const MyApartment = () => {
     }
   };
 
-  if (isLoading) {
-    return <p className="text-center mt-10">Loading apartments...</p>;
-  }
-
-  if (isError) {
-    return (
-      <p className="text-center mt-10 text-red-500">Error loading data!</p>
-    );
-  }
+  if (isLoading) return <p className="text-center mt-10">Loading apartments...</p>;
+  if (isError) return <p className="text-center mt-10 text-red-500">Error loading data!</p>;
 
   return (
     <div className="p-2 md:p-4">
@@ -120,7 +102,6 @@ const MyApartment = () => {
         My Apartments
       </h2>
 
-      {/* responsive wrapper */}
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full text-xs sm:text-sm md:text-base">
           <thead>
@@ -137,13 +118,13 @@ const MyApartment = () => {
           </thead>
 
           <tbody>
-            {Array.isArray(agreements) && agreements.length > 0 ? (
+            {agreements.length > 0 ? (
               agreements.map((apt) => (
                 <tr key={apt._id}>
-                  <td>{apt.apartmentNo}</td>
-                  <td>{apt.floor}</td>
-                  <td>{apt.block}</td>
-                  <td>{apt.rent} ৳</td>
+                  <td>{apt.apartmentNo || "N/A"}</td>
+                  <td>{apt.floor || "-"}</td>
+                  <td>{apt.block || "-"}</td>
+                  <td>{apt.rent ? `${apt.rent} ৳` : "-"}</td>
                   <td className="hidden md:table-cell">{apt.userName}</td>
                   <td className="hidden md:table-cell break-all">
                     {apt.userEmail}
@@ -162,12 +143,12 @@ const MyApartment = () => {
                     <button
                       onClick={() => handlePay(apt._id)}
                       className="btn btn-xs sm:btn-sm btn-success"
-                      disabled={apt.status === "paid"} // ✅ disable if already paid
+                      disabled={apt.status === "paid"}
                     >
                       Pay
                     </button>
                     <button
-                      onClick={() => handleDelete(apt._id)} // <-- bind delete
+                      onClick={() => handleDelete(apt._id)}
                       className="btn btn-xs sm:btn-sm btn-error"
                     >
                       Delete
