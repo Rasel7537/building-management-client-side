@@ -7,7 +7,7 @@ const Announcements = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/announcements")
+      .get("https://building-management-server-side-ashen.vercel.app/announcements")
       .then((res) => {
         setAnnouncements(res.data);
       })

@@ -122,6 +122,9 @@ const DashboardLayout = () => {
           {/* admin role */}
           {!roleLoading && role === "admin" && (
             <>
+            <li>
+              <NavLink to={"AdminProfile"}>Admin Profile</NavLink>
+            </li>
               {/* <li>
                 <NavLink to={"PendingMembers"}>Pending Members</NavLink>
               </li>

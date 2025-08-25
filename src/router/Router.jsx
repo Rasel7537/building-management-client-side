@@ -27,6 +27,7 @@ import MakeAnnouncement from "../pages/Dashbord/MakeAnnouncement/MakeAnnouncemen
 import Announcement from "../pages/Dashbord/Be-A-User/Announcement";
 import AgreementRequests from "../pages/Dashbord/AgreementRequests/AgreementRequests";
 import ManageCoupons from "../pages/Dashbord/ManageCoupons/ManageCoupons";
+import AdminProfile from "../pages/Dashbord/AdminProfile/AdminProfile";
 
 export const router = createBrowserRouter([
   {
@@ -49,7 +50,7 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
       },
-      
+
       {
         path: "BeAMember",
         element: (
@@ -121,11 +122,15 @@ export const router = createBrowserRouter([
         Component: MyProfile,
       },
       {
-        path:"announcement",
-        Component:Announcement,
+        path: "announcement",
+        Component: Announcement,
       },
 
       //admin part
+      {
+        path: "AdminProfile",
+        Component: AdminProfile,
+      },
       {
         path: "MakeAdmin",
         Component: MakeAdmin,
@@ -139,13 +144,13 @@ export const router = createBrowserRouter([
         Component: MakeAnnouncement,
       },
       {
-        path:"AgreementRequests",
-        Component: AgreementRequests
+        path: "AgreementRequests",
+        Component: AgreementRequests,
       },
       {
-        path:"ManageCoupons",
-        Component: ManageCoupons
-      }
+        path: "ManageCoupons",
+        Component: ManageCoupons,
+      },
     ],
   },
 ]);

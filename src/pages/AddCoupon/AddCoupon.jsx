@@ -6,7 +6,7 @@ const AddCoupon = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
-    axios.post("http://localhost:5000/coupons", data)
+    axios.post("https://building-management-server-side-ashen.vercel.app/coupons", data)
       .then(res => {
         if (res.data.success) {
           Swal.fire("Success!", "Coupon added successfully!", "success");

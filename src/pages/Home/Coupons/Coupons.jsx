@@ -9,7 +9,7 @@ const Coupons = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/coupons")
+      .get("https://building-management-server-side-ashen.vercel.app/coupons")
       .then((res) => {
         if (res.data.success) {
           setCoupons(res.data.data || []);

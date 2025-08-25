@@ -11,7 +11,9 @@ const ManageCoupons = () => {
   const { data: coupons = [], isLoading } = useQuery({
     queryKey: ["coupons"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/coupons");
+      const res = await axios.get(
+        "https://building-management-server-side-ashen.vercel.app/coupons"
+      );
       return res.data.data;
     },
   });
@@ -19,7 +21,10 @@ const ManageCoupons = () => {
   // ✅ Add new coupon
   const mutation = useMutation({
     mutationFn: async (newCoupon) => {
-      const res = await axios.post("http://localhost:5000/coupons", newCoupon);
+      const res = await axios.post(
+        "https://building-management-server-side-ashen.vercel.app/coupons",
+        newCoupon
+      );
       return res.data;
     },
     onSuccess: () => {

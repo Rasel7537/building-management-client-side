@@ -112,7 +112,12 @@ const AgreementRequests = () => {
                 <td>{agreement.block}</td>
                 <td>{agreement.apartmentNo}</td>
                 <td>{agreement.rent}</td>
-                <td>{new Date(agreement.requestDate).toLocaleDateString()}</td>
+                {/* <td>{new Date(agreement.requestDate).toLocaleDateString()}</td> */}
+                <td>
+                  {agreement.acceptedDate
+                    ? new Date(agreement.acceptedDate).toLocaleDateString()
+                    : "N/A"}
+                </td>
                 <td className="flex gap-2">
                   <button
                     onClick={() => handleAccept(agreement)}
