@@ -1,5 +1,5 @@
 import React from "react";
-import Buildinglogo from "../../../assets/Blue Minimalist Modern Real Estate Logo.png";
+import Buildinglogo from "../../../assets/final-logo.png";
 
 const Footer = () => {
   return (

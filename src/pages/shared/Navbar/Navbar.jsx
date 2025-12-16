@@ -67,10 +67,6 @@ const Navbar = () => {
       <li>
         <Link to="/dashboard">Dashboard</Link>
       </li>
-
-      {/* <li className="text-black">
-        <NavLink to={"/about"}>About Us</NavLink>
-      </li> */}
     </>
   );
 
@@ -96,7 +92,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-white/60 backdrop-blur-lg rounded-box z-10 mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-white backdrop-blur-lg rounded-box z-10 mt-3 w-52 p-2 shadow"
           >
             {navItems}
           </ul>
@@ -108,7 +104,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{navItems}</ul>
       </div>
 
-      <div className="flex items-center navbar-end gap-3.5">
+      <div className="flex items-center navbar-end gap-3.5 mx-24">
         {user ? (
           <div className="dropdown dropdown-end">
             <div
@@ -117,7 +113,7 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar tooltip tooltip-bottom"
               data-tip={user.displayName || "User"}
             >
-              <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+              <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 ">
                 <img
                   src={
                     user.photoURL || "https://i.ibb.co/ZYW3VTp/brown-brim.png"
@@ -128,7 +124,7 @@ const Navbar = () => {
             </div>
 
             {/* ✅ Dropdown items */}
-            <ul className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+            <ul className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52 ">
               {/* User name only */}
               <li className="text-center font-semibold cursor-default">
                 {user.displayName || "Anonymous User"}
@@ -149,7 +145,7 @@ const Navbar = () => {
         ) : (
           <Link
             to="/login"
-            className="btn btn-outline btn-primary flex items-center gap-2"
+            className="btn btn-outline btn-primary flex items-center gap-2 mx-24"
           >
             <FaUserCircle className="text-xl" />
             Login

@@ -1,14 +1,17 @@
-
-import React from 'react';
-import { Link } from 'react-router-dom';
-import logo from '../../../assets/Blue Minimalist Modern Real Estate Logo.png';
+import React from "react";
+import { Link } from "react-router-dom";
+import logo from "../../../assets/final-logo.png";
 
 const Buildinglogo = () => {
   return (
-    <Link to="/" className="flex gap-2 items-center">
-      <img className="w-16" src={logo} alt="BMS Logo" />
-      <p className="font-bold text-2xl text-black">BMS Hub</p>
-    </Link>
+    <div className="mx-24">
+      <Link to="/" className="flex gap-1 items-center ">
+        <img className="w-12" src={logo} alt="BMS Logo" />
+        <p className="font-bold text-2xl text-center mt-1.5  text-black">
+          BMS Hub
+        </p>
+      </Link>
+    </div>
   );
 };
 
